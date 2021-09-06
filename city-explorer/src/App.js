@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "@restart/ui/esm/Button";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
+import Alert from "react-bootstrap/Alert";
 
 
 class App extends React.Component {
@@ -12,7 +13,8 @@ class App extends React.Component {
     this.state = {
       inputLocation: "",
       outPutResult: "",
-      urlImage: "",
+      errorAlert:'',
+      infoForLocation:false,
     };
   }
 
@@ -24,22 +26,35 @@ class App extends React.Component {
   };
   handleSubmit = async (e) => {
     e.preventDefault();
+    try{
     const url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONKEY}&q=${this.state.inputLocation}&format=json`;
     console.log(url);
 
     const output = await axios.get(url);
     console.log(output);
 
-    this.setState({ outPutResult: output.data[0] });
+    this.setState({
+       outPutResult: output.data[0] ,
+       infoForLocation:true,
+       errorAlert:false
+    });}
 
-    const mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`;
+    catch(err){
+      this.setState({
+        errorAlert:err.message
+      })
+      console.log(this.state.errorAlert)
 
-    const mapImage = await axios.get(mapUrl);
+    }
 
-    this.setState({ urlImage: mapUrl });
+    // const mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`;
 
-    console.log(mapUrl);
-    console.log(mapImage);
+    // const mapImage = await axios.get(mapUrl);
+
+    // this.setState({ urlImage: mapUrl });
+
+    // console.log(mapUrl);
+    // console.log(mapImage);
   };
 
   render() {
@@ -60,8 +75,18 @@ class App extends React.Component {
           </Button>
         </Form>
 
+        {this.state.errorAlert &&
+
+          <Alert  variant='warning'>
+            {this.state.errorAlert} check it out!
+          </Alert>
+        }
+
+       {
+         this.state.infoForLocation &&
+
         <Card style={{ width: "50%" }}>
-          <Card.Img variant="top" src={this.state.urlImage} style={{ width: "50%" }} />
+          <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`} style={{ width: "50%" }} />
           <Card.Body>
             <Card.Title>
               The Location :{this.state.outPutResult.display_name}
@@ -73,6 +98,7 @@ class App extends React.Component {
             <Button variant="primary">Enjoy</Button>
           </Card.Body>
         </Card>
+        }
         
       </div>
     );
