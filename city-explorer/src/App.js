@@ -45,7 +45,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Form>
+        <Form >
           <Form.Group className="mb-3">
             <Form.Control
               type="text"
