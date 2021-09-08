@@ -19,22 +19,22 @@ it's an assignment for this class to create an app for exploring cities as user 
 
 ## Change Log
 
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+1. Applicatiom now has a fully-functional express server, with a GET route fot the weather resources .
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+2.Applicatiom now has a fully-functional express server, with a GET route fot the movies resources .
 
 ## Credit and Collaborations
 
-<!-- (pair-working)[http/Blank board.jpeg] -->
+Issa my colleuge helped me to render the images
 
 ## Time Estimate
 
-Name of feature:
+Name of feature: Display the weathe
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: one hour
 
-Start time:
+Start time: 4pm
 
-Finish time:
+Finish time: next day at 8 pm
 
-Actual time needed to complete:
+Actual time needed to complete: more than 4 hours
