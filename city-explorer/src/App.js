@@ -1,10 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
-import Button from "@restart/ui/esm/Button";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
+import Weather from "./compononts/Weather";
+import Movie from "./compononts/Movie";
 
 
 class App extends React.Component {
@@ -15,47 +17,46 @@ class App extends React.Component {
       outPutResult: "",
       errorAlert:'',
       infoForLocation:false,
+      WeatherInfo:'',
+      movieInfo:''
     };
   }
 
   saveTheInput = (e) => {
-    console.log("hi");
     this.setState({
       inputLocation: e.target.value,
     });
   };
   handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-    const url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONKEY}&q=${this.state.inputLocation}&format=json`;
-    console.log(url);
+    try{   
 
+    const url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONKEY}&q=${this.state.inputLocation}&format=json`;
     const output = await axios.get(url);
-    console.log(output);
+
+    const weatherUrl=`${process.env.REACT_APP_SERVER}/weather?city=${this.state.inputLocation}`
+    const getInfo= await axios.get(weatherUrl);
+
+    const movieUrl=`${process.env.REACT_APP_SERVER}/movies?city=${this.state.inputLocation}`
+    const getMovies= await axios.get(movieUrl)
 
     this.setState({
        outPutResult: output.data[0] ,
        infoForLocation:true,
-       errorAlert:false
-    });}
+       errorAlert:false,
+       WeatherInfo:getInfo.data,
+       movieInfo:getMovies.data
+     }) 
+   }
+  
 
     catch(err){
       this.setState({
         errorAlert:err.message
       })
-      console.log(this.state.errorAlert)
 
     }
-
-    // const mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`;
-
-    // const mapImage = await axios.get(mapUrl);
-
-    // this.setState({ urlImage: mapUrl });
-
-    // console.log(mapUrl);
-    // console.log(mapImage);
-  };
+  }  
 
   render() {
     return (
@@ -99,10 +100,19 @@ class App extends React.Component {
           </Card.Body>
         </Card>
         }
+
+        <Weather
+        weatherInfo={this.state.WeatherInfo}
+        infoForLocation={this.state.infoForLocation}/>
+       <Movie  
+       movieInfo={this.state.movieInfo}
+       infoForLocation={this.state.infoForLocation}
+       />
         
       </div>
     );
   }
 }
+
 
 export default App;
