@@ -60,7 +60,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginLeft:'10px',marginTop:'20px'}}>
         <Form >
           <Form.Group className="mb-3">
             <Form.Control
@@ -86,8 +86,8 @@ class App extends React.Component {
        {
          this.state.infoForLocation &&
 
-        <Card style={{ width: "50%" }}>
-          <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`} style={{ width: "50%" }} />
+        <Card style={{ width: "18rem",marginTop:'10px',marginLeft:'12px'}}>
+          <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`}/>
           <Card.Body>
             <Card.Title>
               The Location :{this.state.outPutResult.display_name}
@@ -96,7 +96,6 @@ class App extends React.Component {
               <p>latitude: {this.state.outPutResult.lat}</p>
               <p>longitude: {this.state.outPutResult.lon}</p>
             </Card.Text>
-            <Button variant="primary">Enjoy</Button>
           </Card.Body>
         </Card>
         }

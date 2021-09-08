@@ -4,13 +4,13 @@ import Card from "react-bootstrap/Card";
 class Movie extends React.Component{
     render() {
     return (
-      <div style={{display: 'block' ,marginTop: '10px'}}>
+      <div style={{display: 'inline-block' ,marginTop: '10px'}}>
         { this.props.infoForLocation &&
         this.props.movieInfo.map((item) => {
           return (
-            <div>
-              <Card style={{ width: "18rem" }}>
-               <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${item.image_url}`} />
+            <div style={{display:'inline-block'}}>
+              <Card style={{ width: "18rem"}}>
+               <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${item.image_url}`} alt="There is no poster" />
               <Card.Body> 
               <Card.Title>
                 The Movie :{item.title}
