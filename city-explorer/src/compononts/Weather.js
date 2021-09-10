@@ -3,11 +3,11 @@ import Dropdown from 'react-bootstrap/Dropdown'
 class Weather extends React.Component {
   render() {
     return (
-      <div style={{marginLeft:'10px',marginTop:'8px'}}>
+      <div style={{marginLeft:'48%',marginTop:'3%'}}>
         
             
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic"> WeatherForcast
+              <Dropdown.Toggle variant="success" id="dropdown-basic" style={{backgroundColor:'rgb(158, 119, 119)',width:'200px',height:'50px'}}> WeatherForcast
               </Dropdown.Toggle>
 
              <Dropdown.Menu>
