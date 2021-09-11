@@ -54,7 +54,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ marginLeft: "3px", marginTop: "20px" , backgroundColor:'#FDFAF6',marginLeft:'3%',marginRight:'3%'}}>
+      <div style={{ marginTop: "20px" , backgroundColor:'#FDFAF6',marginLeft:'3%',marginRight:'3%'}}>
         <div style={{marginLeft:'35%',width:'30%',marginTop:'5%'}}>
           <Form>
             <Form.Group className="mb-3" style={{paddingTop:'5%'}}>
