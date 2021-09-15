@@ -54,55 +54,73 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: "20px" , backgroundColor:'#FDFAF6',marginLeft:'3%',marginRight:'3%'}}>
-        <div style={{marginLeft:'35%',width:'30%',marginTop:'5%'}}>
+      <div
+        style={{
+          marginTop: "20px",
+          backgroundColor: "#FDFAF6",
+          marginLeft: "3%",
+          marginRight: "3%",
+        }}
+      >
+        <div style={{ marginLeft: "35%", width: "30%", marginTop: "5%" }}>
           <Form>
-            <Form.Group className="mb-3" style={{paddingTop:'5%'}}>
+            <Form.Group className="mb-3" style={{ paddingTop: "5%" }}>
               <Form.Control
                 type="text"
                 onChange={this.saveTheInput}
                 placeholder="Enter The Location You want to explore"
-                style={{width:'128%', height:'80px',paddingTop:'5%'}}
+                style={{ width: "128%", height: "80px", paddingTop: "5%" }}
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit" onClick={this.handleSubmit} style={{marginLeft:'50%',width:'30%',backgroundColor:'#DEBA9D'}}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={this.handleSubmit}
+              style={{
+                marginLeft: "50%",
+                width: "30%",
+                backgroundColor: "#DEBA9D",
+              }}
+            >
               Explore
             </Button>
           </Form>
         </div>
-        {this.state.errorAlert && (
-          <Alert variant="warning">{this.state.errorAlert} check it out!</Alert>
-        )}
+        <div>
+          {this.state.errorAlert && (
+            <Alert variant="warning">
+              {this.state.errorAlert} check it out!
+            </Alert>
+          )}
 
-        {this.state.infoForLocation && (
-          <Card
-            style={{ width: "30%", marginTop: "2%", marginLeft: "37%" }}
-          >
-            <Card.Img
-              variant="top"
-              src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`}
-            />
-            <Card.Body>
-              <Card.Title>
-                The Location :{this.state.outPutResult.display_name}
-              </Card.Title>
-              <Card.Text>
-                <p>latitude: {this.state.outPutResult.lat}</p>
-                <p>longitude: {this.state.outPutResult.lon}</p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        )}
+          {this.state.infoForLocation && (
+            <Card style={{ width: "30%", marginTop: "2%", marginLeft: "37%" }}>
+              <Card.Img
+                variant="top"
+                src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONKEY}&center=${this.state.outPutResult.lat},${this.state.outPutResult.lon}&zoom=1-18`}
+              />
+              <Card.Body>
+                <Card.Title>
+                  The Location :{this.state.outPutResult.display_name}
+                </Card.Title>
+                <Card.Text>
+                  <p>latitude: {this.state.outPutResult.lat}</p>
+                  <p>longitude: {this.state.outPutResult.lon}</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          )}
 
-        <Weather
-          weatherInfo={this.state.WeatherInfo}
-          infoForLocation={this.state.infoForLocation}
-        />
-        <Movie
-          movieInfo={this.state.movieInfo}
-          infoForLocation={this.state.infoForLocation}
-        />
+          <Weather
+            weatherInfo={this.state.WeatherInfo}
+            infoForLocation={this.state.infoForLocation}
+          />
+          <Movie
+            movieInfo={this.state.movieInfo}
+            infoForLocation={this.state.infoForLocation}
+          />
+        </div>
       </div>
     );
   }
